@@ -15,7 +15,7 @@
 
                                 <div class="col-12">
 
-                                    <a href="{{ route('apartments.create') }}" class="btn btn-primary">Добавить клиента</a>
+                                    <a href="{{ route('apartments.create') }}" class="btn btn-primary">Добавить запись о продаже</a>
                                 </div>
                             </form>
 
@@ -33,26 +33,27 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">Асанов Бектур</th>
-                                    <td>Buy groceries for next week</td>
-                                    <td>In progress</td>
+                                @foreach($sales as $sale)
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Керимов Айбек</th>
-                                    <td>Renew car insurance</td>
-                                    <td>In progress</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Шамшиев Канат</th>
-                                    <td>Sign up for online course</td>
-                                    <td>In progress</td>
-                                    <td>
+                                    <tr>
+                                        <th scope="row">{{$sale->date}}</th>
+                                        <th scope="row">{{$sale->home_id}}</th>
+                                        <td>{{$sale->apartment_id}}</td>
+                                        <td>{{$sale->customer_id}}</td>
+                                        <td>
+                                            <a href="{{ route('sales.show', $sale) }}" type="submit" class="btn btn-danger">Показать</a>
+                                            <a href="{{ route('sales.edit', $sale) }}" type="submit" class="btn btn-danger">Изменить</a>
+                                            <form action="{{ route('sales.destroy', $sale) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Удалить</button>
+                                            </form>
 
-                                    </td>
-                                </tr>
+                                        </td>
+
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
 
@@ -64,3 +65,5 @@
     </section>
 
 @endsection
+
+

@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+
+Route::resource('apartments', \App\Http\Controllers\ApartmentsController::class);
+Route::resource('sales', \App\Http\Controllers\SalesController::class);
+Route::resource('home', \App\Http\Controllers\HomeController::class);
+Route::resource('customers', \App\Http\Controllers\CustomerController::class);
+Route::resource('welcome', \App\Http\Controllers\WelcomeController::class);
+

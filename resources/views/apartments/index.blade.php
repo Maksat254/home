@@ -15,7 +15,7 @@
 
                                 <div class="col-12">
 
-                                    <a href="{{ route('apartments.create') }}" class="btn btn-primary">Добавить клиента</a>
+                                    <a href="{{ route('apartments.create') }}" class="btn btn-primary">Добавить квартиру</a>
                                 </div>
                             </form>
 
@@ -33,26 +33,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">Асанов Бектур</th>
-                                    <td>Buy groceries for next week</td>
-                                    <td>In progress</td>
+                                @foreach($apartments as $apartment)
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Керимов Айбек</th>
-                                    <td>Renew car insurance</td>
-                                    <td>In progress</td>
 
-                                </tr>
                                 <tr>
-                                    <th scope="row">Шамшиев Канат</th>
-                                    <td>Sign up for online course</td>
-                                    <td>In progress</td>
+                                    <th scope="row">{{$apartment->number}}</th>
+                                    <th scope="row">{{$apartment->rooms}}</th>
+                                    <td>{{$apartment->floor}}</td>
+                                    <td>{{$apartment->area}}</td>
+                                    <td>{{$apartment->cost}}</td>
+                                    <td>{{$apartment->home_id}}</td>
                                     <td>
+                                        <a href="{{ route('apartments.show', $apartment) }}" type="submit" class="btn btn-danger">Показать</a>
+                                        <a href="{{ route('apartments.edit', $apartment) }}" type="submit" class="btn btn-danger">Изменить</a>
+                                        <form action="{{ route('apartments.destroy', $apartment) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Удалить</button>
+                                        </form>
 
                                     </td>
+
                                 </tr>
+                                @endforeach
                                 </tbody>
                             </table>
 
@@ -64,3 +67,4 @@
     </section>
 
 @endsection
+

@@ -15,7 +15,7 @@
 
                                 <div class="col-12">
 
-                                    <a href="{{ route('apartments.create') }}" class="btn btn-primary">Добавить клиента</a>
+                                    <a href="{{ route('customers.create') }}" class="btn btn-primary">Добавить клиента</a>
                                 </div>
                             </form>
 
@@ -33,26 +33,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">Асанов Бектур</th>
-                                    <td>Buy groceries for next week</td>
-                                    <td>In progress</td>
+                                @foreach($customers as $customer)
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Керимов Айбек</th>
-                                    <td>Renew car insurance</td>
-                                    <td>In progress</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Шамшиев Канат</th>
-                                    <td>Sign up for online course</td>
-                                    <td>In progress</td>
-                                    <td>
+                                    <tr>
+                                        <th scope="row">{{$customer->name}}</th>
+                                        <th scope="row">{{$customer->surname}}</th>
+                                        <td>{{$customer->phone}}</td>
+                                        <td>{{$customer->email}}</td>
+                                        <td>
+                                            <a href="{{ route('customers.edit', $customer) }}" type="submit" class="btn btn-danger">Изменить</a>
+                                            <form action="{{ route('customers.destroy', $customer) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Удалить</button>
+                                            </form>
 
-                                    </td>
-                                </tr>
+                                        </td>
+
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
 
@@ -64,3 +64,5 @@
     </section>
 
 @endsection
+
+
